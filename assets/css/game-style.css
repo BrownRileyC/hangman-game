@@ -1,0 +1,18 @@
+.goalLetter {
+    color: blue;
+    float: left;
+    padding: 15px;
+}
+.col-12 {
+    width: 100%;
+    position: relative;
+}
+#hangmanBox {
+    background-color: yellow;
+    position: relative;
+    height: 50px;
+    width: auto;
+    text-align: center;
+    margin: 0 auto;
+
+}
