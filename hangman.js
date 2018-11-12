@@ -1,5 +1,6 @@
 // This is the parent array that a word is chosen from
 var hangmanArray = ["Select", "User", "Clicker", "Governer", "Royalty", "Gourmet", "Fortune"];
+var possibleLengthArray = [4, 5, 6, 7, 8, 9];
 
 
 // This creates an empty global array and variable
@@ -49,13 +50,34 @@ function startGame() {
     // This takes the goalWord and splits it into single uppercase characters and enters that into goalArray
     goalArray = goalWord.toUpperCase().split("");
     console.log("New value: "+ goalArray);
-    
+    console.log(goalArray.length);
     // This makes <p> elements and gives them ids equal to their index position so I can change them later
     for (var i = 0; i < goalArray.length; i++){
         console.log(i);
         var goalLetter = document.createElement("P");
         var text = document.createTextNode("__");
-        goalLetter.setAttribute("class", "goalLetter");
+        switch (goalArray.length) {
+            case 4:
+            goalLetter.setAttribute("class", "goalLetter4");
+            break;
+            case 5:
+            goalLetter.setAttribute("class", "goalLetter5");
+            break;
+            case 6:
+            goalLetter.setAttribute("class", "goalLetter6");
+            break;
+            case 7:
+            goalLetter.setAttribute("class", "goalLetter7");
+            break;
+            case 8:
+            goalLetter.setAttribute("class", "goalLetter8");
+            break;
+            case 9:
+            goalLetter.setAttribute("class", "goalLetter9");
+            break;
+            default:
+                console.log("Something went wrong");
+        };
         goalLetter.setAttribute("id", i);
         goalLetter.appendChild(text);
         document.getElementById("hangmanBox").appendChild(goalLetter);

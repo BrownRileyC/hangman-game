@@ -1,16 +1,40 @@
-.goalLetter {
+* {
+    text-align: center;
+}
+.goalLetter4 {
     color: blue;
     float: left;
-    padding: 15px;
+    width: 25%
 }
-.col-12 {
-    width: 100%;
-    position: relative;
+.goalLetter5 {
+    color: green;
+    float: left;
+    width: 20%
+}
+.goalLetter6 {
+    color: orangered;
+    float: left;
+    width: 16.6%
+}
+.goalLetter7 {
+    color: purple;
+    float: left;
+    width: 14.285%
+}
+.goalLetter8 {
+    color: grey;
+    float: left;
+    width: 12.5%
+}
+.goalLetter9 {
+    color: black;
+    float: left;
+    width: .11%
 }
 #hangmanBox {
-    background-color: yellow;
+    background-color: whitesmoke;
     position: relative;
-    height: 50px;
+    height: 40px;
     width: auto;
     text-align: center;
     margin: 0 auto;
