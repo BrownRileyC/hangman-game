@@ -1,13 +1,3 @@
-// This function creates a <p> element in the html, then the text that goes inside, sets the class "goalLetter" on the <P> tag and finally places the element inside the element with the id "hangmanBox"
-// function myFunction() {
-//     var x = document.createElement("P");
-//     var t = document.createTextNode("GG");
-//     x.setAttribute("class", "goalLetter")
-//     x.appendChild(t);
-//     document.getElementById("hangmanBox").appendChild(x);
-// }
-
-
 // This is the parent array that a word is chosen from
 var hangmanArray = ["Select", "User", "Clicker", "Governer", "Royalty", "Gourmet", "Fortune"];
 
@@ -18,6 +8,8 @@ var goalWord;
 var guessedArray = [];
 var guessedGoalArray = [];
 var guessesUsed = 0;
+var wins = 0;
+var losses = 0;
 
 // This removes any elements previously added to the hangmanBox and resets the guesses used variable and the guessedArray
 function resetGame(index) {
@@ -75,7 +67,7 @@ function startGame() {
 };
 
 // This function watches for when the user releases a key and sets a variable, userInput, to that key and converts it to upper case.
-document.onkeyup = function userInput(event) {
+document.onkeydown = function userInput(event) {
     var userInput = event.key.toLocaleUpperCase();
 
     // This sets the guessedGoalArray to the same length as trhe goalArray but leaves it empty
@@ -89,6 +81,7 @@ document.onkeyup = function userInput(event) {
     for (var j = 0; j < goalArray.length; j++) {
         if (goalArray[j] === userInput) {
             document.getElementById(j).innerHTML = userInput.toString().toLocaleUpperCase();
+            
             // This line adds the value to the same index in the gussedGoalArray
             guessedGoalArray.fill(document.getElementById(j).innerHTML, j, j+1);
         };
@@ -97,9 +90,26 @@ document.onkeyup = function userInput(event) {
     guessesUsed++;
     document.getElementById("guesses").innerHTML = 9-guessesUsed;
     console.log("After for: "+guessedGoalArray);
-    if (guessedGoalArray.join("") === goalWord) {
-        alert("You won!");
-    };
 };
 
+// This function runs when the user releases a key and it looks for the two game end conditions, no more guesses or you got the whole word correct.
+document.onkeyup = function gameEndCheck() {
+    if (guessedGoalArray.join("") === goalWord) {
+        alert("You won!");
+        wins++;
+        document.getElementById("winBox").innerHTML = wins;
+        var replay = confirm("Would you like to play again?");
+        if (replay === true) {
+            startGame();
+        };
+    } else if (guessesUsed === 9) {
+        alert("You lost!  The word was" + goalWord + ".  Better luck next time!");
+        losses++;
+        document.getElementById("lossBox").innerHTML = losses;
+        replay = confirm("Would you like to play again?");
+        if (replay === true) {
+            startGame();
+        };
+    };
+};
 
