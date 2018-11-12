@@ -35,3 +35,10 @@ What does the game need to do?:
 - When none of the letters in the "word to guess" section match a string "_" then tell the user that they won
 - Also increment the number of wins
 - When the number of guesses hits zero check if any of the letters in the "word to guess" section match the string "_" and if they still do tell the user they lost and increment the loss counter.
+
+
+
+
+
+How do I detect that the user has guessed all the letters of the word?
+    - as part of the onkeyup have the page check if goalArray[j] matches the <p id=j> 
