@@ -1,6 +1,7 @@
 // This is the parent array that a word is chosen from
-var hangmanArray = ["Select", "User", "Clicker", "Governer", "Royalty", "Gourmet", "Fortune"];
-var possibleLengthArray = [4, 5, 6, 7, 8, 9];
+var hangmanArrayEasy = ["Click", "User", "Mouse", "Icon", "Pixel"];
+var hangmanArrayMedium = ["Select", "Clicker", "Google", "Gourmet", "Fortune"];
+var hangmanArrayHard = ["Computer","Application","Software","Keyboard","Javascript"];
 
 
 // This creates an empty global array and variable
@@ -32,12 +33,13 @@ function selectGoal(array) {
     console.log(goalWord);
     return goalWord;
 };
+
 // This function is called when the user clicks the "start game" button
-function startGame() {
+function startGameEasy() {
     
     // This randomly selects a element from the hangman array
     console.log("Starting Goalword: "+ goalWord)
-    selectGoal(hangmanArray);
+    selectGoal(hangmanArrayEasy);
     
     // Here I check to see what goal array is set to currently
     console.log("Starting Array: "+goalArray);
@@ -63,17 +65,97 @@ function startGame() {
             case 5:
             goalLetter.setAttribute("class", "goalLetter5");
             break;
+            default:
+                console.log("Something went wrong");
+        };
+        goalLetter.setAttribute("id", i);
+        goalLetter.appendChild(text);
+        document.getElementById("hangmanBox").appendChild(goalLetter);
+        };
+
+    // Here I return the value of goalArray so I can reference it elsewhere in the program
+    console.log("Post Blanks: "+goalWord);
+    return goalArray;
+};
+
+function startGameMedium() {
+    
+    // This randomly selects a element from the hangman array
+    console.log("Starting Goalword: "+ goalWord)
+    selectGoal(hangmanArrayMedium);
+    
+    // Here I check to see what goal array is set to currently
+    console.log("Starting Array: "+goalArray);
+
+    // this calls the resetGame Function
+    for (var k = 0; k <goalArray.length; k++) {
+        resetGame(k);
+        };
+
+    // This takes the goalWord and splits it into single uppercase characters and enters that into goalArray
+    goalArray = goalWord.toUpperCase().split("");
+    console.log("New value: "+ goalArray);
+    console.log(goalArray.length);
+    // This makes <p> elements and gives them ids equal to their index position so I can change them later
+    for (var i = 0; i < goalArray.length; i++){
+        console.log(i);
+        var goalLetter = document.createElement("P");
+        var text = document.createTextNode("__");
+        switch (goalArray.length) {
             case 6:
             goalLetter.setAttribute("class", "goalLetter6");
             break;
             case 7:
             goalLetter.setAttribute("class", "goalLetter7");
             break;
+            default:
+                console.log("Something went wrong");
+        };
+        goalLetter.setAttribute("id", i);
+        goalLetter.appendChild(text);
+        document.getElementById("hangmanBox").appendChild(goalLetter);
+        };
+
+    // Here I return the value of goalArray so I can reference it elsewhere in the program
+    console.log("Post Blanks: "+goalWord);
+    return goalArray;
+};
+
+function startGameHard() {
+    
+    // This randomly selects a element from the hangman array
+    console.log("Starting Goalword: "+ goalWord)
+    selectGoal(hangmanArrayHard);
+    
+    // Here I check to see what goal array is set to currently
+    console.log("Starting Array: "+goalArray);
+
+    // this calls the resetGame Function
+    for (var k = 0; k <goalArray.length; k++) {
+        resetGame(k);
+        };
+
+    // This takes the goalWord and splits it into single uppercase characters and enters that into goalArray
+    goalArray = goalWord.toUpperCase().split("");
+    console.log("New value: "+ goalArray);
+    console.log(goalArray.length);
+    // This makes <p> elements and gives them ids equal to their index position so I can change them later
+    for (var i = 0; i < goalArray.length; i++){
+        console.log(i);
+        var goalLetter = document.createElement("P");
+        var text = document.createTextNode("__");
+        switch (goalArray.length) {
             case 8:
             goalLetter.setAttribute("class", "goalLetter8");
             break;
             case 9:
             goalLetter.setAttribute("class", "goalLetter9");
+            break;
+            case 10:
+            goalLetter.setAttribute("class", "goalLetter10");
+            break;
+            case 11:
+            goalLetter.setAttribute("class", "goalLetter11");
             break;
             default:
                 console.log("Something went wrong");
@@ -106,10 +188,14 @@ document.onkeydown = function userInput(event) {
             
             // This line adds the value to the same index in the gussedGoalArray
             guessedGoalArray.fill(document.getElementById(j).innerHTML, j, j+1);
+        } else {
+            guessesUsed = guessesUsed + (1/goalArray.length);
         };
     };
     // This increments the number of guesses used so far each key stroke and sends that to the guesses element in the html
-    guessesUsed++;
+    console.log("After guess: " +guessesUsed)
+    guessesUsed = Math.floor(guessesUsed)
+    console.log("After lowering :" +guessesUsed)
     document.getElementById("guesses").innerHTML = 9-guessesUsed;
     console.log("After for: "+guessedGoalArray);
 };

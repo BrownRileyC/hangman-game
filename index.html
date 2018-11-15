@@ -14,7 +14,17 @@
         <h1 class="display-4">Hangman!</h1>
         <p class="lead">Click the button to start the game!</p>
         <hr class="my-4">
-        <button class="startButton" onclick="startGame()">"Start Game"</button>
+        <div class="row">
+            <div class="col-4">
+                <button class="startButton" onclick="startGameEasy()">"Easy: 4-5 letters"</button>
+            </div>
+            <div class="col-4">
+                <button class="startButton" onclick="startGameMedium()">"Medium: 6-7 letters"</button>
+            </div>
+            <div class="col-4">
+                <button class="startButton" onclick="startGameHard()">"Hard: 8 or more letters"</button>
+            </div>
+        </div>
     </div>
 
     <div class="container">    
@@ -26,20 +36,21 @@
         </div>
         <div class="row">
             <div class="col-4 instructions">
-                <p>Once you've begun make your guess by pressing a letter!</p>
+                <p>Once you've started your game make your guess by typing a letter!</p>
                 <p>If you are right it will fill it in each time that letter appears.</p>
-                <p>Right or wrong it will appear in the letter Bank below!</p>
-                <p>You only have 9 guesses, so be careful.  When you run out it's game over.</p>
+                <p>Right or wrong it will appear in the Letter Bank in the middle!</p>
+                <p>Guess correctly and you keep your guess, miss it and you lose it!</p>
+                <p>Be careful, nine misses and that's game over!</p>
             </div>
             <div class="col-4 bank">
-                <h2>Guessed Letters</h2>
+                <h2>Letter Bank</h2>
                 <p id="guessBox">No guesses yet!</p>
             </div>
             <div class="col-4 stats">
                 <div class="row">
                     <div class="col-12">
-                        <h2>Guesses Remaining</h2>
-                        <p id="guesses">9</p>
+                        <h2>Misses left</h2>
+                        <p id="guesses"></p>
                     </div>
                 </div>
                 <div class="row">
@@ -48,7 +59,7 @@
                         <p id="winBox">0</p>
                     </div>
                     <div class="col-6">
-                        <h2>losses</h2>
+                        <h2>Losses</h2>
                         <p id="lossBox">0</p>
                     </div>
                 </div>

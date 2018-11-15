@@ -4,33 +4,52 @@
 .goalLetter4 {
     color: blue;
     float: left;
-    width: 25%
+    width: 25%;
+    margin-top: 1rem;
 }
 .goalLetter5 {
     color: green;
     float: left;
-    width: 20%
+    width: 20%;
+    margin-top: 1rem;
 }
 .goalLetter6 {
     color: orangered;
     float: left;
-    width: 16.6%
+    width: 16.6%;
+    margin-top: 1rem;
 }
 .goalLetter7 {
     color: purple;
     float: left;
-    width: 14.285%
+    width: 14.285%;
+    margin-top: 1rem;
 }
 .goalLetter8 {
     color: grey;
     float: left;
-    width: 12.5%
+    width: 12.5%;
+    margin-top: 1rem;
 }
 .goalLetter9 {
     color: black;
     float: left;
-    width: .11%
+    width: 11%;
+    margin-top: 1rem;
 }
+.goalLetter10 {
+    color: black;
+    float: left;
+    width: 10%;
+    margin-top: 1rem;
+}
+.goalLetter11 {
+    color: black;
+    float: left;
+    width: 9%;
+    margin-top: 1rem;
+}
+
 #hangmanBox {
     background-color: whitesmoke;
     position: relative;
