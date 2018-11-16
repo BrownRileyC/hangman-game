@@ -190,11 +190,12 @@ document.onkeydown = function userInput(event) {
             guessedGoalArray.fill(document.getElementById(j).innerHTML, j, j+1);
         } else {
             guessesUsed = guessesUsed + (1/goalArray.length);
+            console.log(guessesUsed)
         };
     };
     // This increments the number of guesses used so far each key stroke and sends that to the guesses element in the html
     console.log("After guess: " +guessesUsed)
-    guessesUsed = Math.floor(guessesUsed)
+    guessesUsed = Math.floor(guessesUsed+0.05)
     console.log("After lowering :" +guessesUsed)
     document.getElementById("guesses").innerHTML = 9-guessesUsed;
     console.log("After for: "+guessedGoalArray);
@@ -207,8 +208,14 @@ document.onkeyup = function gameEndCheck() {
         wins++;
         document.getElementById("winBox").innerHTML = wins;
         var replay = confirm("Would you like to play again?");
-        if (replay === true) {
-            startGame();
+        if (replay === true ) {
+            if (goalArray.length < 6) {
+                startGameEasy();
+            } else if (goalArray.length < 8) {
+                startGameMedium();
+            } else {
+                startGameHard();
+            };
         };
     } else if (guessesUsed === 9) {
         alert("You lost!  The word was" + goalWord + ".  Better luck next time!");
@@ -216,7 +223,13 @@ document.onkeyup = function gameEndCheck() {
         document.getElementById("lossBox").innerHTML = losses;
         replay = confirm("Would you like to play again?");
         if (replay === true) {
-            startGame();
+            if (goalArray.length < 6) {
+                startGameEasy();
+            } else if (goalArray.length < 8) {
+                startGameMedium();
+            } else {
+                startGameHard();
+            };
         };
     };
 };
