@@ -19,7 +19,7 @@ function resetGame(index) {
     var goalLetter = document.getElementById(index);
     hangmanBox.removeChild(goalLetter);
     guessesUsed = 0;
-    document.getElementById("guesses").innerHTML = 9;
+    document.getElementById("guesses").innerHTML = "";
     guessedArray.length = 0;
     document.getElementById("guessBox").innerHTML = "Nothing Yet";
     guessedGoalArray.length= 0;
@@ -263,6 +263,10 @@ document.onkeyup = function gameEndCheck() {
             } else {
                 startGameHard();
             };
+        } else {
+            for (var k = 0; k <goalArray.length; k++) {
+                resetGame(k);
+        };
         };
     } else if (guessesUsed === 9) {
         alert("You lost!  The word was " + goalWord + ".  Better luck next time!");
@@ -278,6 +282,10 @@ document.onkeyup = function gameEndCheck() {
             } else {
                 startGameHard();
             };
+        } else {
+            for (var k = 0; k <goalArray.length; k++) {
+                resetGame(k);
+             };
         };
     };
 };
