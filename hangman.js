@@ -23,6 +23,9 @@ function resetGame(index) {
     guessedArray.length = 0;
     document.getElementById("guessBox").innerHTML = "Nothing Yet";
     guessedGoalArray.length= 0;
+    for (var m = 1; m<10;m++) {
+        document.getElementById("head"+m).style.display = "none";
+    };
     // return guessesUsed;
 };
 
@@ -198,11 +201,55 @@ document.onkeydown = function userInput(event) {
     guessesUsed = Math.floor(guessesUsed+0.05)
     console.log("After lowering :" +guessesUsed)
     document.getElementById("guesses").innerHTML = 9-guessesUsed;
+    switch (guessesUsed) {
+        case 1:
+            document.getElementById("head1").style.display = "block";
+            console.log("Did my Job, Made it Show up1")
+            break;
+        case 2:
+            document.getElementById("head1").style.display = "none";
+            document.getElementById("head2").style.display = "block";
+            console.log("Did my Job, Made it Show up1")
+            break;
+        case 3:
+            document.getElementById("head2").style.display = "none";
+            document.getElementById("head3").style.display = "block";
+            console.log("Did my Job, Made it Show up1")
+            break;
+        case 4:
+            document.getElementById("head3").style.display = "none";
+            document.getElementById("head4").style.display = "block";
+            console.log("Did my Job, Made it Show up1")
+            break;
+        case 5:
+            document.getElementById("head4").style.display = "none";
+            document.getElementById("head5").style.display = "block";
+            break;
+        case 6:
+            document.getElementById("head5").style.display = "none";
+            document.getElementById("head6").style.display = "block";
+            break;
+        case 7:
+            document.getElementById("head6").style.display = "none";
+            document.getElementById("head7").style.display = "block";
+            break;
+        case 8:
+            document.getElementById("head7").style.display = "none";
+            document.getElementById("head8").style.display = "block";
+            break;
+        case 9:
+            document.getElementById("head8").style.display = "none";
+            document.getElementById("head9").style.display = "block";
+            break;
+            default:
+            document.getElementById("head9").style.display = "none";
+    };
     console.log("After for: "+guessedGoalArray);
 };
 
 // This function runs when the user releases a key and it looks for the two game end conditions, no more guesses or you got the whole word correct.
 document.onkeyup = function gameEndCheck() {
+    
     if (guessedGoalArray.join("") === goalWord) {
         alert("You won!");
         wins++;
@@ -218,10 +265,11 @@ document.onkeyup = function gameEndCheck() {
             };
         };
     } else if (guessesUsed === 9) {
-        alert("You lost!  The word was" + goalWord + ".  Better luck next time!");
+        alert("You lost!  The word was " + goalWord + ".  Better luck next time!");
         losses++;
         document.getElementById("lossBox").innerHTML = losses;
         replay = confirm("Would you like to play again?");
+        document.getElementById("head9").style.display = "none";
         if (replay === true) {
             if (goalArray.length < 6) {
                 startGameEasy();

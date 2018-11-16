@@ -42,25 +42,46 @@
                 <p>Guess correctly and you keep your guess, miss it and you lose it!</p>
                 <p>Be careful, nine misses and that's game over!</p>
             </div>
-            <div class="col-4 bank">
-                <h2>Letter Bank</h2>
-                <p id="guessBox">No guesses yet!</p>
-            </div>
-            <div class="col-4 stats">
+            <div class="col-8">
                 <div class="row">
-                    <div class="col-12">
-                        <h2>Misses left</h2>
-                        <p id="guesses"></p>
+                    <div class="col-6 bank">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2>Letter Bank</h2>
+                                <p id="guessBox">No guesses yet!</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 hangmanPictures">
+                                <img class="headStart" id="head1" src="./assets/Hangman bits/Empty-head.png" alt="">
+                                <img class="headStart" id="head2" src="./assets/Hangman bits/One-Eye.png" alt="">
+                                <img class="headStart" id="head3" src="./assets/Hangman bits/Both-Eyes.png" alt="">
+                                <img class="headStart" id="head4" src="./assets/Hangman bits/Has-nose.png" alt="">
+                                <img class="headStart" id="head5" src="./assets/Hangman bits/one-eyebrow.png" alt="">
+                                <img class="headStart" id="head6" src="./assets/Hangman bits/both-eyebrows.png" alt="">
+                                <img class="headStart" id="head7" src="./assets/Hangman bits/Sad-face.png" alt="">
+                                <img class="headStart" id="head8" src="./assets/Hangman bits/With-text.png" alt="">
+                                <img class="headStart" id="head9" src="./assets/Hangman bits/Skull_and_crossbones.svg">
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <h2>Wins</h2>
-                        <p id="winBox">0</p>
-                    </div>
-                    <div class="col-6">
-                        <h2>Losses</h2>
-                        <p id="lossBox">0</p>
+                    <div class="col-6 stats">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2>Misses left</h2>
+                                <p id="guesses"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <h2>Wins</h2>
+                                <p id="winBox">0</p>
+                            </div>
+                            <div class="col-6">
+                                <h2>Losses</h2>
+                                <p id="lossBox">0</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
