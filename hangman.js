@@ -270,62 +270,63 @@ document.onkeydown = function userInput(event) {
 
 // This function runs when the user releases a key and it looks for the two game end conditions, no more guesses or you got the whole word correct.
 document.onkeyup = function gameEndCheck() {
-    
-    if (guessedGoalArray.join("") === goalWord) {
-        alert("You won!");
-        wins++;
-        document.getElementById("winBox").innerHTML = wins;
-        var replay = confirm("Would you like to play again?");
-        if (replay === true) {
-            if (goalArray.length < 6) {
-                startGameEasy();
-            } else if (goalArray.length < 8) {
-                startGameMedium();
+    if (gameStarted === true) {
+        if (guessedGoalArray.join("") === goalWord) {
+            alert("You won!");
+            wins++;
+            document.getElementById("winBox").innerHTML = wins;
+            var replay = confirm("Would you like to play again?");
+            if (replay === true) {
+                if (goalArray.length < 6) {
+                    startGameEasy();
+                } else if (goalArray.length < 8) {
+                    startGameMedium();
+                } else {
+                    startGameHard();
+                };
             } else {
-                startGameHard();
+                alert("Your record was: Wins: " + wins + " Losses: " + losses);
+                resetWins();
+                resetLosses();
+                gameStarted=false;
+                console.log("Did reset run: "+wins);
+                // Here I'm going to hide the goalLetter elements and reset the letter bank text
+                document.getElementById("guesses").innerHTML = "";
+                guessedArray.length = 0;
+                document.getElementById("guessBox").innerHTML = "Nothing Yet";
+                for (var n = 0; n <goalArray.length; n++) {
+                    var goalLetter = document.getElementById(n);
+                    goalLetter.textContent = "";
+                };
             };
-        } else {
-            alert("Your record was: Wins: " + wins + " Losses: " + losses);
-            resetWins();
-            resetLosses();
-            gameStarted=false;
-            console.log("Did reset run: "+wins);
-            // Here I'm going to hide the goalLetter elements and reset the letter bank text
-            document.getElementById("guesses").innerHTML = "";
-            guessedArray.length = 0;
-            document.getElementById("guessBox").innerHTML = "Nothing Yet";
-            for (var n = 0; n <goalArray.length; n++) {
-                var goalLetter = document.getElementById(n);
-                goalLetter.textContent = "";
-            };
-        };
-    } else if (guessesUsed === 9) {
-        alert("You lost!  The word was " + goalWord + ".  Better luck next time!");
-        losses++;
-        document.getElementById("lossBox").innerHTML = losses;
-        var replay = confirm("Would you like to play again?");
-        document.getElementById("head9").style.display = "none";
-        if (replay === true) {
-            if (goalArray.length < 6) {
-                startGameEasy();
-            } else if (goalArray.length < 8) {
-                startGameMedium();
+        } else if (guessesUsed === 9) {
+            alert("You lost!  The word was " + goalWord + ".  Better luck next time!");
+            losses++;
+            document.getElementById("lossBox").innerHTML = losses;
+            var replay = confirm("Would you like to play again?");
+            document.getElementById("head9").style.display = "none";
+            if (replay === true) {
+                if (goalArray.length < 6) {
+                    startGameEasy();
+                } else if (goalArray.length < 8) {
+                    startGameMedium();
+                } else {
+                    startGameHard();
+                };
             } else {
-                startGameHard();
-            };
-        } else {
-            alert("Your record was: Wins: " + wins + " Losses: " + losses);
-            resetWins();
-            resetLosses();
-            console.log("Did reset run: "+wins);
-            document.getElementById("guesses").innerHTML = "";
-            guessedArray.length = 0;
-            gameStarted=false;
-            guessesUsed = 0;
-            document.getElementById("guessBox").innerHTML = "Nothing Yet";
-            for (var n = 0; n <goalArray.length; n++) {
-                var goalLetter = document.getElementById(n);
-                goalLetter.textContent = "";
+                alert("Your record was: Wins: " + wins + " Losses: " + losses);
+                resetWins();
+                resetLosses();
+                console.log("Did reset run: "+wins);
+                document.getElementById("guesses").innerHTML = "";
+                guessedArray.length = 0;
+                gameStarted=false;
+                guessesUsed = 0;
+                document.getElementById("guessBox").innerHTML = "Nothing Yet";
+                for (var n = 0; n <goalArray.length; n++) {
+                    var goalLetter = document.getElementById(n);
+                    goalLetter.textContent = "";
+                };
             };
         };
     };
