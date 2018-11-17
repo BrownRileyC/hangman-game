@@ -269,9 +269,6 @@ document.onkeyup = function gameEndCheck() {
         document.getElementById("winBox").innerHTML = wins;
         var replay = confirm("Would you like to play again?");
         if (replay === true) {
-            // for (var k = 0; k <goalArray.length; k++) {
-                // resetGame(k);
-            // };
             if (goalArray.length < 6) {
                 startGameEasy();
             } else if (goalArray.length < 8) {
@@ -284,9 +281,14 @@ document.onkeyup = function gameEndCheck() {
             resetWins();
             resetLosses();
             console.log("Did reset run: "+wins);
-            for (var k = 0; k <goalArray.length; k++) {
-                resetGame(k);
-        };
+            // Here I'm going to hide the goalLetter elements and reset the letter bank text
+            document.getElementById("guesses").innerHTML = "";
+            guessedArray.length = 0;
+            document.getElementById("guessBox").innerHTML = "Nothing Yet";
+            for (var n = 0; n <goalArray.length; n++) {
+                var goalLetter = document.getElementById(n);
+                goalLetter.textContent = "";
+            };
         };
     } else if (guessesUsed === 9) {
         alert("You lost!  The word was " + goalWord + ".  Better luck next time!");
@@ -295,9 +297,6 @@ document.onkeyup = function gameEndCheck() {
         replay = confirm("Would you like to play again?");
         document.getElementById("head9").style.display = "none";
         if (replay === true) {
-            // for (var k = 0; k <goalArray.length; k++) {
-                // resetGame(k);
-            // };
             if (goalArray.length < 6) {
                 startGameEasy();
             } else if (goalArray.length < 8) {
@@ -310,9 +309,13 @@ document.onkeyup = function gameEndCheck() {
             resetWins();
             resetLosses();
             console.log("Did reset run: "+wins);
-            for (var k = 0; k <goalArray.length; k++) {
-                resetGame(k);
-             };
+            document.getElementById("guesses").innerHTML = "";
+            guessedArray.length = 0;
+            document.getElementById("guessBox").innerHTML = "Nothing Yet";
+            for (var n = 0; n <goalArray.length; n++) {
+                var goalLetter = document.getElementById(n);
+                goalLetter.textContent = "";
+            };
         };
     };
 };
