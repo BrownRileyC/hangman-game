@@ -36,6 +36,12 @@ function resetWins() {
     // Add the part that changes the text
 };
 
+function resetLosses() {
+    losses = 0;
+    document.getElementById("lossBox").innerHTML = losses;
+    return losses;
+};
+
 // This randomly selects the goalWord and returns it to a the global variable.
 function selectGoal(array) {
     goalWord = array[Math.floor(Math.random()*array.length)];
@@ -55,9 +61,9 @@ function startGameEasy() {
     console.log("Starting Array: "+goalArray);
 
     // this calls the resetGame Function
-    // for (var k = 0; k <goalArray.length; k++) {
-    //     resetGame(k);
-    //     };
+    for (var k = 0; k <goalArray.length; k++) {
+        resetGame(k);
+        };
 
     // This takes the goalWord and splits it into single uppercase characters and enters that into goalArray
     goalArray = goalWord.toUpperCase().split("");
@@ -98,9 +104,9 @@ function startGameMedium() {
     console.log("Starting Array: "+goalArray);
 
     // this calls the resetGame Function
-    // for (var k = 0; k <goalArray.length; k++) {
-    //     resetGame(k);
-    //     };
+        for (var k = 0; k <goalArray.length; k++) {
+        resetGame(k);
+        };
 
     // This takes the goalWord and splits it into single uppercase characters and enters that into goalArray
     goalArray = goalWord.toUpperCase().split("");
@@ -141,9 +147,9 @@ function startGameHard() {
     console.log("Starting Array: "+goalArray);
 
     // this calls the resetGame Function
-    // for (var k = 0; k <goalArray.length; k++) {
-    //     resetGame(k);
-    //     };
+    for (var k = 0; k <goalArray.length; k++) {
+        resetGame(k);
+        };
 
     // This takes the goalWord and splits it into single uppercase characters and enters that into goalArray
     goalArray = goalWord.toUpperCase().split("");
@@ -263,9 +269,9 @@ document.onkeyup = function gameEndCheck() {
         document.getElementById("winBox").innerHTML = wins;
         var replay = confirm("Would you like to play again?");
         if (replay === true) {
-            for (var k = 0; k <goalArray.length; k++) {
-                resetGame(k);
-            };
+            // for (var k = 0; k <goalArray.length; k++) {
+                // resetGame(k);
+            // };
             if (goalArray.length < 6) {
                 startGameEasy();
             } else if (goalArray.length < 8) {
@@ -276,6 +282,7 @@ document.onkeyup = function gameEndCheck() {
         } else {
             alert("Your record was: Wins: " + wins + " Losses: " + losses);
             resetWins();
+            resetLosses();
             console.log("Did reset run: "+wins);
             for (var k = 0; k <goalArray.length; k++) {
                 resetGame(k);
@@ -288,9 +295,9 @@ document.onkeyup = function gameEndCheck() {
         replay = confirm("Would you like to play again?");
         document.getElementById("head9").style.display = "none";
         if (replay === true) {
-            for (var k = 0; k <goalArray.length; k++) {
-                resetGame(k);
-            };
+            // for (var k = 0; k <goalArray.length; k++) {
+                // resetGame(k);
+            // };
             if (goalArray.length < 6) {
                 startGameEasy();
             } else if (goalArray.length < 8) {
@@ -301,6 +308,7 @@ document.onkeyup = function gameEndCheck() {
         } else {
             alert("Your record was: Wins: " + wins + " Losses: " + losses);
             resetWins();
+            resetLosses();
             console.log("Did reset run: "+wins);
             for (var k = 0; k <goalArray.length; k++) {
                 resetGame(k);
