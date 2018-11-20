@@ -2,9 +2,9 @@
 var hangmanArrayEasy = ["Click", "User", "Mouse", "Icon", "Pixel"];
 var hangmanArrayMedium = ["Select", "Clicker", "Google", "Gourmet", "Fortune"];
 var hangmanArrayHard = ["Computer","Application","Software","Keyboard","Javascript"];
+var alphabet = ["A","B","C",'D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
 
-
-// This creates an empty global array and variable
+// These are my global variables I'll reference throughout the program
 var goalArray = [];
 var goalWord;
 var guessedArray = [];
@@ -27,14 +27,13 @@ function resetGame(index) {
     for (var m = 1; m<10;m++) {
         document.getElementById("head"+m).style.display = "none";
     };
-    // return guessesUsed;
 };
+
+// These reset functions update the relevent text on the webpage and resets the relevent global variable 
 function resetWins() {
     wins = 0;
     document.getElementById("winBox").innerHTML = wins;
     return wins;
-    // return num;
-    // Add the part that changes the text
 };
 
 function resetLosses() {
@@ -51,32 +50,30 @@ function selectGoal(array) {
     return goalWord;
 };
 
-// This function is called when the user clicks the "start game" button
+// This function is called when the user clicks the "start easy game" button
 function startGameEasy() {
     
-    // This randomly selects a element from the hangman array
-    console.log("Starting Goalword: "+ goalWord)
+    // This randomly selects a element from the easy hangman array
     selectGoal(hangmanArrayEasy);
 
+    // This sets the gameStarted Variable to true, telling the onkey functions later to start working
     gameStarted = true;
-    
-    // Here I check to see what goal array is set to currently
-    console.log("Starting Array: "+goalArray);
 
-    // this calls the resetGame Function
+    // this calls the resetGame Function, getting rid of the elements made the last time the startgame function ran
+    // When first called this does nothing because no elements have been added to the goalArray yet
     for (var k = 0; k <goalArray.length; k++) {
         resetGame(k);
         };
 
     // This takes the goalWord and splits it into single uppercase characters and enters that into goalArray
     goalArray = goalWord.toUpperCase().split("");
-    console.log("New value: "+ goalArray);
-    console.log(goalArray.length);
-    // This makes <p> elements and gives them ids equal to their index position so I can change them later
+
+    // This makes <p> elements and gives them ids equal to their index position so I can reference them later
     for (var i = 0; i < goalArray.length; i++){
-        console.log(i);
         var goalLetter = document.createElement("P");
         var text = document.createTextNode("__");
+
+        // This switch case assigns the approprate class so I can change the spacing of the letters based upon the length of the word
         switch (goalArray.length) {
             case 4:
             goalLetter.setAttribute("class", "goalLetter4");
@@ -93,34 +90,33 @@ function startGameEasy() {
         };
 
     // Here I return the value of goalArray so I can reference it elsewhere in the program
-    console.log("Post Blanks: "+goalWord);
     return goalArray;
 };
 
+// This is the same as the startGameEasy function except I pass the hangmanArrayMedium to selectGoal instead of hangmanArrayEasy
 function startGameMedium() {
     
     // This randomly selects a element from the hangman array
-    console.log("Starting Goalword: "+ goalWord)
     selectGoal(hangmanArrayMedium);
-    gameStarted = true;
     
-    // Here I check to see what goal array is set to currently
-    console.log("Starting Array: "+goalArray);
+    // This sets the gameStarted Variable to true, telling the onkey functions later to start working
+    gameStarted = true;
 
-    // this calls the resetGame Function
-        for (var k = 0; k <goalArray.length; k++) {
+    // this calls the resetGame Function, getting rid of the elements made the last time the startgame function ran
+    // When first called this does nothing because no elements have been added to the goalArray yet
+    for (var k = 0; k <goalArray.length; k++) {
         resetGame(k);
         };
 
     // This takes the goalWord and splits it into single uppercase characters and enters that into goalArray
     goalArray = goalWord.toUpperCase().split("");
-    console.log("New value: "+ goalArray);
-    console.log(goalArray.length);
-    // This makes <p> elements and gives them ids equal to their index position so I can change them later
+
+    // This makes <p> elements and gives them ids equal to their index position so I can reference them later
     for (var i = 0; i < goalArray.length; i++){
-        console.log(i);
         var goalLetter = document.createElement("P");
         var text = document.createTextNode("__");
+
+        // This switch case assigns the approprate class so I can change the spacing of the letters based upon the length of the word
         switch (goalArray.length) {
             case 6:
             goalLetter.setAttribute("class", "goalLetter6");
@@ -137,32 +133,28 @@ function startGameMedium() {
         };
 
     // Here I return the value of goalArray so I can reference it elsewhere in the program
-    console.log("Post Blanks: "+goalWord);
     return goalArray;
 };
 
 function startGameHard() {
     
     // This randomly selects a element from the hangman array
-    console.log("Starting Goalword: "+ goalWord)
     selectGoal(hangmanArrayHard);
-    gameStarted = true;
     
-    // Here I check to see what goal array is set to currently
-    console.log("Starting Array: "+goalArray);
+    // This sets the gameStarted Variable to true, telling the onkey functions later to start working
+    gameStarted = true;
 
-    // this calls the resetGame Function
+    // this calls the resetGame Function, getting rid of the elements made the last time the startgame function ran
+    // When first called this does nothing because no elements have been added to the goalArray yet
     for (var k = 0; k <goalArray.length; k++) {
         resetGame(k);
         };
 
     // This takes the goalWord and splits it into single uppercase characters and enters that into goalArray
     goalArray = goalWord.toUpperCase().split("");
-    console.log("New value: "+ goalArray);
-    console.log(goalArray.length);
-    // This makes <p> elements and gives them ids equal to their index position so I can change them later
+
+    // This makes <p> elements and gives them ids equal to their index position so I can reference them later
     for (var i = 0; i < goalArray.length; i++){
-        console.log(i);
         var goalLetter = document.createElement("P");
         var text = document.createTextNode("__");
         switch (goalArray.length) {
@@ -187,94 +179,94 @@ function startGameHard() {
         };
 
     // Here I return the value of goalArray so I can reference it elsewhere in the program
-    console.log("Post Blanks: "+goalWord);
     return goalArray;
 };
 
 // This function watches for when the user releases a key and sets a variable, userInput, to that key and converts it to upper case.
 document.onkeydown = function userInput(event) {
+        // This if statement checks to see if gameStarted is true and only runs the rest of the program is so, thus the user can't make an input until they start the game.
         if (gameStarted === true) {
         var userInput = event.key.toLocaleUpperCase();
-
-        // This sets the guessedGoalArray to the same length as trhe goalArray but leaves it empty
-        guessedGoalArray.length = goalArray.length;
-        
-        // This pushes the user inputs to the guessed array and sends that to the HTML
-        guessedArray.push(userInput);
-        document.getElementById("guessBox").innerHTML = guessedArray;
-        
-        // Next it checks each index of goalArray to see if it matches userInput, and if it does it changes the <p> element with id = to the index it was checking with the letter that is UserInput
-        for (var j = 0; j < goalArray.length; j++) {
-            if (goalArray[j] === userInput) {
-                document.getElementById(j).innerHTML = userInput.toString().toLocaleUpperCase();
-                
-                // This line adds the value to the same index in the gussedGoalArray
-                guessedGoalArray.fill(document.getElementById(j).innerHTML, j, j+1);
-            } else {
-                guessesUsed = guessesUsed + (1/goalArray.length);
-                console.log(guessesUsed)
+            if (alphabet.includes(userInput)) {
+            // This sets the guessedGoalArray to the same length as the goalArray but leaves it empty
+            guessedGoalArray.length = goalArray.length;
+            
+            // This pushes the user inputs to the guessed array and sends that to the HTML
+            guessedArray.push(userInput);
+            document.getElementById("guessBox").innerHTML = guessedArray;
+            
+            // Next it checks each index of goalArray to see if it matches userInput, and if it does it changes the <p> element with id = to the index it was checking with the letter that is UserInput
+            for (var j = 0; j < goalArray.length; j++) {
+                if (goalArray[j] === userInput) {
+                    document.getElementById(j).innerHTML = userInput.toString().toLocaleUpperCase();
+                    
+                    // This line adds the value to the same index in the gussedGoalArray
+                    guessedGoalArray.fill(document.getElementById(j).innerHTML, j, j+1);
+                } else {
+                    // Each time the userinput doesn't match the goal array we increment the guessesUsed variable by a fraction based upon the goalArray.length.  This allows us to increment guessesUsed by 1 even when running through the loop multiple times
+                    guessesUsed = guessesUsed + (1/goalArray.length);
+                };
+            };
+            // Here we use math.floor and add a small amount to the guessesUsed variable because fractions are wonky, in the end this ensures that the number added is above 1 if no elements matched the userInput in the for loop above but it still rounds down to zero if even one matched
+            guessesUsed = Math.floor(guessesUsed+0.05)
+            document.getElementById("guesses").innerHTML = 9-guessesUsed;
+            // This switch case looks at the guessesUsed variable and changes the styling on the hidden images on the page.  This causes the "hangman" to progress as you miss guesses like in the game.
+            switch (guessesUsed) {
+                case 1:
+                    document.getElementById("head1").style.display = "block";
+                    break;
+                case 2:
+                    document.getElementById("head1").style.display = "none";
+                    document.getElementById("head2").style.display = "block";
+                    break;
+                case 3:
+                    document.getElementById("head2").style.display = "none";
+                    document.getElementById("head3").style.display = "block";
+                    break;
+                case 4:
+                    document.getElementById("head3").style.display = "none";
+                    document.getElementById("head4").style.display = "block";
+                    break;
+                case 5:
+                    document.getElementById("head4").style.display = "none";
+                    document.getElementById("head5").style.display = "block";
+                    break;
+                case 6:
+                    document.getElementById("head5").style.display = "none";
+                    document.getElementById("head6").style.display = "block";
+                    break;
+                case 7:
+                    document.getElementById("head6").style.display = "none";
+                    document.getElementById("head7").style.display = "block";
+                    break;
+                case 8:
+                    document.getElementById("head7").style.display = "none";
+                    document.getElementById("head8").style.display = "block";
+                    break;
+                case 9:
+                    document.getElementById("head8").style.display = "none";
+                    document.getElementById("head9").style.display = "block";
+                    break;
+                    default:
+                    document.getElementById("head9").style.display = "none";
+                    console.log("I logged something");
             };
         };
-        // This increments the number of guesses used so far each key stroke and sends that to the guesses element in the html
-        console.log("After guess: " +guessesUsed)
-        guessesUsed = Math.floor(guessesUsed+0.05)
-        console.log("After lowering :" +guessesUsed)
-        document.getElementById("guesses").innerHTML = 9-guessesUsed;
-        switch (guessesUsed) {
-            case 1:
-                document.getElementById("head1").style.display = "block";
-                console.log("Did my Job, Made it Show up1")
-                break;
-            case 2:
-                document.getElementById("head1").style.display = "none";
-                document.getElementById("head2").style.display = "block";
-                console.log("Did my Job, Made it Show up1")
-                break;
-            case 3:
-                document.getElementById("head2").style.display = "none";
-                document.getElementById("head3").style.display = "block";
-                console.log("Did my Job, Made it Show up1")
-                break;
-            case 4:
-                document.getElementById("head3").style.display = "none";
-                document.getElementById("head4").style.display = "block";
-                console.log("Did my Job, Made it Show up1")
-                break;
-            case 5:
-                document.getElementById("head4").style.display = "none";
-                document.getElementById("head5").style.display = "block";
-                break;
-            case 6:
-                document.getElementById("head5").style.display = "none";
-                document.getElementById("head6").style.display = "block";
-                break;
-            case 7:
-                document.getElementById("head6").style.display = "none";
-                document.getElementById("head7").style.display = "block";
-                break;
-            case 8:
-                document.getElementById("head7").style.display = "none";
-                document.getElementById("head8").style.display = "block";
-                break;
-            case 9:
-                document.getElementById("head8").style.display = "none";
-                document.getElementById("head9").style.display = "block";
-                break;
-                default:
-                document.getElementById("head9").style.display = "none";
-        };
-        console.log("After for: "+guessedGoalArray);
     };
 };
     
 
 // This function runs when the user releases a key and it looks for the two game end conditions, no more guesses or you got the whole word correct.
 document.onkeyup = function gameEndCheck() {
+    // Same as before this makes it so the game won't check if the player has won or lost unless they are playing the game
     if (gameStarted === true) {
+        // Here we check if the guessedGoalArray (where we fill in the correct userInputs) matches the string in the goalWord variable, which is the win condition.
         if (guessedGoalArray.join("") === goalWord) {
+            // When it does match we alert the user they won and increment the wins counter
             alert("You won!");
             wins++;
             document.getElementById("winBox").innerHTML = wins;
+            // Here we prompt the user with a confirm request of to keep playing.  If they respond yes we check what dificulty they were on and restart the game.
             var replay = confirm("Would you like to play again?");
             if (replay === true) {
                 if (goalArray.length < 6) {
@@ -285,21 +277,28 @@ document.onkeyup = function gameEndCheck() {
                     startGameHard();
                 };
             } else {
+                // If they respond no to the cofirm prompt we alert them to their record for that play session and call the reset win and loss functions
                 alert("Your record was: Wins: " + wins + " Losses: " + losses);
                 resetWins();
                 resetLosses();
+                // Here we set the gameStarted to false again making the onkey events not run, preventing the game from trying to see if the player wins while the game isn't running
                 gameStarted=false;
-                console.log("Did reset run: "+wins);
-                // Here I'm going to hide the goalLetter elements and reset the letter bank text
+                // Here I'm going to hide the goalLetter elements and any hangmanhead elements and reset the letter bank text
+                for (var y = 1; y<10; y++){
+                    document.getElementById("head"+y).style.display = "none";
+                };
                 document.getElementById("guesses").innerHTML = "";
                 guessedArray.length = 0;
+                guessesUsed = 0;
                 document.getElementById("guessBox").innerHTML = "Nothing Yet";
                 for (var n = 0; n <goalArray.length; n++) {
                     var goalLetter = document.getElementById(n);
                     goalLetter.textContent = "";
                 };
             };
+            // This is the loss condition, if the user has used all their guesses and didn't satisfy the win condition then this section runs.
         } else if (guessesUsed === 9) {
+            // It is basically the same as the above win condition but increments the loss counter
             alert("You lost!  The word was " + goalWord + ".  Better luck next time!");
             losses++;
             document.getElementById("lossBox").innerHTML = losses;
@@ -317,7 +316,6 @@ document.onkeyup = function gameEndCheck() {
                 alert("Your record was: Wins: " + wins + " Losses: " + losses);
                 resetWins();
                 resetLosses();
-                console.log("Did reset run: "+wins);
                 document.getElementById("guesses").innerHTML = "";
                 guessedArray.length = 0;
                 gameStarted=false;
