@@ -2,7 +2,9 @@
 var hangmanArrayEasy = ["Click", "User", "Mouse", "Icon", "Pixel"];
 var hangmanArrayMedium = ["Select", "Clicker", "Google", "Gourmet", "Fortune"];
 var hangmanArrayHard = ["Computer","Application","Software","Keyboard","Javascript"];
-var alphabet = ["A","B","C",'D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+var hangmanArrayLatin = ['Dies','Calidus','In Silviam','Rivus','Frigidus','Errant','Prope','Vult','Ignavus','Respondet','Neque','Temerarius','Lupus','Perterritus','Statim','Ferte Auxilium','Clamor','Ad Puellas','Petit','Arripit','Repellit','E Silva','Salvae','Adveniunt']
+var latinMeaningsArray = ['Day','Warm','Into the Woods','Stream','Cool, Cold','Wander','Near','(He/She) Wants, Wishes','Cowardly, Lazy','(he/she) Replies','Neither...Nor','Rash, Reckless, Bold','Wolf','Frightened, Terrified','Immediately','Bring Help! Help!','Shout, Shouting','Towards the Girls','(he/she) Looks for, Seeks','(he/she) grabs hold of, snatches','(he/she) drives off','Out of the Woods','Safe','(they) reach, arrive (at)']; 
+var alphabet = ["A","B","C",'D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',' ']
 
 // These are my global variables I'll reference throughout the program
 var goalArray = [];
@@ -13,6 +15,8 @@ var guessesUsed = 0;
 var wins = 0;
 var losses = 0;
 var gameStarted = false;
+var latinGame = false;
+var randomNumber;
 
 // This removes any elements previously added to the hangmanBox and resets the guesses used variable and the guessedArray
 function resetGame(index) {
@@ -44,11 +48,13 @@ function resetLosses() {
 
 // This randomly selects the goalWord and returns it to a the global variable.
 function selectGoal(array) {
-    goalWord = array[Math.floor(Math.random()*array.length)];
+    randomNumber = Math.floor(Math.random()*array.length)
+    goalWord = array[randomNumber];
     goalWord = goalWord.toUpperCase();
     console.log(goalWord);
     return goalWord;
 };
+
 
 // This function is called when the user clicks the "start easy game" button
 function startGameEasy() {
@@ -82,7 +88,6 @@ function startGameEasy() {
             goalLetter.setAttribute("class", "goalLetter5");
             break;
             default:
-                console.log("Something went wrong");
         };
         goalLetter.setAttribute("id", i);
         goalLetter.appendChild(text);
@@ -110,6 +115,7 @@ function startGameMedium() {
 
     // This takes the goalWord and splits it into single uppercase characters and enters that into goalArray
     goalArray = goalWord.toUpperCase().split("");
+    console.log(goalArray);
 
     // This makes <p> elements and gives them ids equal to their index position so I can reference them later
     for (var i = 0; i < goalArray.length; i++){
@@ -125,7 +131,6 @@ function startGameMedium() {
             goalLetter.setAttribute("class", "goalLetter7");
             break;
             default:
-                console.log("Something went wrong");
         };
         goalLetter.setAttribute("id", i);
         goalLetter.appendChild(text);
@@ -171,7 +176,6 @@ function startGameHard() {
             goalLetter.setAttribute("class", "goalLetter11");
             break;
             default:
-                console.log("Something went wrong");
         };
         goalLetter.setAttribute("id", i);
         goalLetter.appendChild(text);
@@ -182,6 +186,81 @@ function startGameHard() {
     return goalArray;
 };
 
+function startGameLatin() {
+    
+    latinGame = true;
+    // This randomly selects a element from the easy hangman array
+    selectGoal(hangmanArrayLatin);
+
+    // This sets the gameStarted Variable to true, telling the onkey functions later to start working
+    gameStarted = true;
+
+    // this calls the resetGame Function, getting rid of the elements made the last time the startgame function ran
+    // When first called this does nothing because no elements have been added to the goalArray yet
+    for (var k = 0; k <goalArray.length; k++) {
+        resetGame(k);
+        };
+
+    // This takes the goalWord and splits it into single uppercase characters and enters that into goalArray
+    goalArray = goalWord.toUpperCase().split("");
+
+    // This makes <p> elements and gives them ids equal to their index position so I can reference them later
+    for (var i = 0; i < goalArray.length; i++){
+        var goalLetter = document.createElement("P");
+        if (goalArray[i] === " "){
+            var text = document.createTextNode(" ");
+            guessedGoalArray.length = goalArray.length;
+            guessedGoalArray.fill(goalArray[i],i,i+1);
+            console.log(goalArray[i]);
+            console.log(guessedGoalArray, goalArray);
+        } else {
+        var text = document.createTextNode("__");
+        };
+        // This switch case assigns the approprate class so I can change the spacing of the letters based upon the length of the word
+        switch (goalArray.length) {
+            case 4:
+            goalLetter.setAttribute("class", "goalLetter4");
+            break;
+            case 5:
+            goalLetter.setAttribute("class", "goalLetter5");
+            break;
+            case 6:
+            goalLetter.setAttribute("class", "goalLetter6");
+            break;
+            case 7:
+            goalLetter.setAttribute("class", "goalLetter7");
+            break;
+            case 8:
+            goalLetter.setAttribute("class", "goalLetter8");
+            break;
+            case 9:
+            goalLetter.setAttribute("class", "goalLetter9");
+            break;
+            case 10:
+            goalLetter.setAttribute("class", "goalLetter10");
+            break;
+            case 11:
+            goalLetter.setAttribute("class", "goalLetter11");
+            break;
+            case 12:
+            goalLetter.setAttribute("class", "goalLetter12");
+            break;
+            case 13:
+            goalLetter.setAttribute("class", "goalLetter13");
+            break;
+            case 14:
+            goalLetter.setAttribute("class", "goalLetter14");
+            break;
+            default:
+        };
+        goalLetter.setAttribute("id", i);
+        goalLetter.appendChild(text);
+        document.getElementById("hangmanBox").appendChild(goalLetter);
+        };
+
+    // Here I return the value of goalArray so I can reference it elsewhere in the program
+    return goalArray;
+};
 // This function watches for when the user releases a key and sets a variable, userInput, to that key and converts it to upper case.
 document.onkeydown = function userInput(event) {
         // This if statement checks to see if gameStarted is true and only runs the rest of the program is so, thus the user can't make an input until they start the game.
@@ -249,7 +328,6 @@ document.onkeydown = function userInput(event) {
                     break;
                     default:
                     document.getElementById("head9").style.display = "none";
-                    console.log("I logged something");
             };
         };
     };
@@ -263,18 +341,22 @@ document.onkeyup = function gameEndCheck() {
         // Here we check if the guessedGoalArray (where we fill in the correct userInputs) matches the string in the goalWord variable, which is the win condition.
         if (guessedGoalArray.join("") === goalWord) {
             // When it does match we alert the user they won and increment the wins counter
-            alert("You won!");
+            alert("You won! This word means " + latinMeaningsArray[randomNumber]);
             wins++;
             document.getElementById("winBox").innerHTML = wins;
             // Here we prompt the user with a confirm request of to keep playing.  If they respond yes we check what dificulty they were on and restart the game.
             var replay = confirm("Would you like to play again?");
             if (replay === true) {
-                if (goalArray.length < 6) {
-                    startGameEasy();
-                } else if (goalArray.length < 8) {
-                    startGameMedium();
+                if (!latinGame) {
+                    if (goalArray.length < 6) {
+                        startGameEasy();
+                    } else if (goalArray.length < 8) {
+                        startGameMedium();
+                    } else {
+                        startGameHard();
+                    };
                 } else {
-                    startGameHard();
+                    startGameLatin();
                 };
             } else {
                 // If they respond no to the cofirm prompt we alert them to their record for that play session and call the reset win and loss functions

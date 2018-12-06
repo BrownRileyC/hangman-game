@@ -50,6 +50,24 @@
     margin-top: 1rem;
 }
 
+.goalLetter12 {
+    color: chartreuse;
+    float: left;
+    width: 8%;
+    margin-top: 1rem;
+}
+.goalLetter13 {
+    color: violet;
+    float: left;
+    width: 7%;
+    margin-top: 1rem;
+}
+.goalLetter14 {
+    color: mediumaquamarine;
+    float: left;
+    width: 7%;
+    margin-top: 1rem;
+}
 #hangmanBox {
     background-color: whitesmoke;
     position: relative;
