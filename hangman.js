@@ -20,6 +20,7 @@ var randomNumber;
 
 // This removes any elements previously added to the hangmanBox and resets the guesses used variable and the guessedArray
 function resetGame(index) {
+    latinGame = false;
     var hangmanBox = document.getElementById("hangmanBox");
     var goalLetter = document.getElementById(index);
     hangmanBox.removeChild(goalLetter);
@@ -188,7 +189,7 @@ function startGameHard() {
 
 function startGameLatin() {
     
-    latinGame = true;
+    
     // This randomly selects a element from the easy hangman array
     selectGoal(hangmanArrayLatin);
 
@@ -201,6 +202,7 @@ function startGameLatin() {
         resetGame(k);
         };
 
+    latinGame = true;
     // This takes the goalWord and splits it into single uppercase characters and enters that into goalArray
     goalArray = goalWord.toUpperCase().split("");
 
@@ -341,7 +343,11 @@ document.onkeyup = function gameEndCheck() {
         // Here we check if the guessedGoalArray (where we fill in the correct userInputs) matches the string in the goalWord variable, which is the win condition.
         if (guessedGoalArray.join("") === goalWord) {
             // When it does match we alert the user they won and increment the wins counter
-            alert("You won! This word means " + latinMeaningsArray[randomNumber]);
+            if (latinGame) {
+                alert("You won! This word means " + latinMeaningsArray[randomNumber]);
+            } else {
+                alert("You Won!");
+            };
             wins++;
             document.getElementById("winBox").innerHTML = wins;
             // Here we prompt the user with a confirm request of to keep playing.  If they respond yes we check what dificulty they were on and restart the game.
@@ -381,18 +387,26 @@ document.onkeyup = function gameEndCheck() {
             // This is the loss condition, if the user has used all their guesses and didn't satisfy the win condition then this section runs.
         } else if (guessesUsed === 9) {
             // It is basically the same as the above win condition but increments the loss counter
-            alert("You lost!  The word was " + goalWord + ".  Better luck next time!");
+            if (latinGame) {
+                alert("You lost!  The word was " + goalWord + ".  It means "+latinMeaningsArray[randomNumber]);
+            } else {
+                alert("You lost!  The word was " + goalWord + ". Better luck next time.");
+            };
             losses++;
             document.getElementById("lossBox").innerHTML = losses;
             var replay = confirm("Would you like to play again?");
             document.getElementById("head9").style.display = "none";
             if (replay === true) {
-                if (goalArray.length < 6) {
-                    startGameEasy();
-                } else if (goalArray.length < 8) {
-                    startGameMedium();
+                if (!latinGame) {
+                    if (goalArray.length < 6) {
+                        startGameEasy();
+                    } else if (goalArray.length < 8) {
+                        startGameMedium();
+                    } else {
+                        startGameHard();
+                    };
                 } else {
-                    startGameHard();
+                    startGameLatin();
                 };
             } else {
                 alert("Your record was: Wins: " + wins + " Losses: " + losses);
